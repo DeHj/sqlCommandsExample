@@ -1,7 +1,3 @@
-use dbMusicService
-
-/*
-drop table Users
 go
 CREATE TABLE [dbo].[Users]
 (
@@ -10,10 +6,9 @@ CREATE TABLE [dbo].[Users]
 	Password nvarchar(max),
 	PRIMARY KEY	(IdUser)
 )
-*/
 
-/*
-drop table User_Track
+
+
 go
 create table User_Track
 (
@@ -23,10 +18,9 @@ create table User_Track
 	MarkIsGood bit,
 	PRIMARY KEY (ID_U_T)
 )
-*/
 
-/*
---drop table Tracks
+
+
 go
 CREATE TABLE [dbo].[Tracks]
 (
@@ -38,6 +32,7 @@ CREATE TABLE [dbo].[Tracks]
 )
 
 
+
 go
 CREATE TABLE [dbo].[Genres]
 (
@@ -47,7 +42,7 @@ CREATE TABLE [dbo].[Genres]
 )
 
 
---drop table Groups
+
 go
 CREATE TABLE [dbo].[Groups]
 (
@@ -71,6 +66,7 @@ CREATE TABLE [dbo].[User_Genre]
 )
 
 
+
 go
 CREATE TABLE [dbo].[Track_Genre]
 (
@@ -80,10 +76,9 @@ CREATE TABLE [dbo].[Track_Genre]
 	coef real NOT NULL,
 	PRIMARY KEY	(ID_T_G)
 )
-*/
 
-/*
-drop table Authors
+
+
 go
 create table Authors
 (
@@ -92,8 +87,3 @@ create table Authors
 	Password nvarchar(max),
 	PRIMARY KEY (IDAuthor)
 )
-*/
-
-
---drop table User_Genre
---drop table Groups

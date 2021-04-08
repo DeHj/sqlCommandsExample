@@ -1,36 +1,5 @@
-use dbMusicService
+-- Recommendations selection procedure
 
-/*
-Select Users.Name, Track_Genre.IDTrack,  SUM(Track_Genre.coef * User_Genre.coef) as resultCoef
---Select *
-from Users
-	join User_Genre on Users.IdUser = User_Genre.IdUser
-	join Track_Genre on User_Genre.IdGenre = Track_Genre.IdGenre
-	group by IDTrack, Users.Name
-*/
-
-/*
-Select * from Users, User_Genre
-	where User_Genre.IdGenre = 1
-*/
-
-/*
-Select Users.Name, Track_Genre.IDTrack, Tracks.Name as TrackName, SUM(Track_Genre.coef * User_Genre.coef) as resultCoef
-	from Users
-		join User_Genre on Users.IdUser = User_Genre.IdUser
-		join Track_Genre on User_Genre.IdGenre = Track_Genre.IdGenre
-		join Tracks on Track_Genre.IDTrack = Tracks.IdTrack
-		where Users.IdUser = 2-- AND resultCoef > 0
-		group by Track_Genre.IDTrack, Users.Name, Users.IdUser, Tracks.Name
-*/
---order by resultCoef Desc
-
-
-
--- Процедура подбора рекомендованных композиций
-
-
-drop procedure GetRecomendations;
 go
 create procedure GetRecomendations
 	@idUser int
@@ -46,17 +15,14 @@ begin
 			group by Users.Name, Users.IdUser, Tracks.Name, Tracks.IdTrack
 	) as A
 	where resultCoef > 0
-	--except
 	order by resultCoef desc
 end
 
 
 
 
--- Процедура поиска композиции по названию
+-- Procedure of track finding by name
 
-/*
-drop procedure GetTrackByName
 go
 create procedure GetTrackByName
 	@name nvarchar(max)
@@ -65,14 +31,12 @@ begin
 	Select IDTrack, Name from Tracks
 	where Name = @name
 end
-*/
 
 
 
--- Процедура проставления положительной оценки
 
-/*
-drop procedure PutLike
+-- Positive mark procedure
+
 go
 create procedure PutLike
 	@IdUser int,
@@ -107,14 +71,11 @@ begin
 	Insert into User_Track (IdUser, IdTrack, MarkIsGood) VALUES
 	(@IdUser, @IdTrack, 1);
 end
-*/
 
 
 
--- Процедура проставления отрицательной оценки
+-- Negative mark procedure
 
-/*
-drop procedure PutDislike
 go
 create procedure PutDislike
 	@IdUser int,
@@ -143,17 +104,3 @@ begin
 	Insert into User_Track (IdUser, IdTrack, MarkIsGood) VALUES
 	(@IdUser, @IdTrack, 0);
 end
-*/
-
-
-
-
---exec GetTrackByName 'Name1'
---exec GetRecomendations 1
---exec PutLike 1, 4
---exec PutDislike 1, 4
-
---select * from User_Genre
---where IdUser = 1
-
---exec GetRecomendations 1

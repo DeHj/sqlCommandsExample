@@ -1,9 +1,5 @@
-use dbMusicService
+-- User registration procedure
 
--- Регистрация пользователя
-
-/*
-drop procedure AddUser
 go
 create procedure AddUser
 	@Name nvarchar(max),
@@ -16,13 +12,13 @@ begin
 	if (@Name = '')
 	begin
 		select @Success = 0
-		select @Message = 'Некорректный логин'
+		select @Message = 'Invalid login'
 		return
 	end
 	else if (@Password = '')
 	begin
 		select @Success = 0
-		select @Message = 'Некорректный пароль'
+		select @Message = 'Invalid password'
 		return
 	end
 	else if (select count(*) from Users where Users.Name = @Name) = 0
@@ -35,17 +31,14 @@ begin
 	else
 	begin
 		select @Success = 0
-		select @Message = 'Пользователь с таким логином уже существует'
+		select @Message = 'User with such login already exist'
 	end
 end
-*/
 
 
 
--- Регистрация автора
+-- Author registration user
 
-/*
-drop procedure AddAuthor
 go
 create procedure AddAuthor
 	@Name nvarchar(max),
@@ -58,13 +51,13 @@ begin
 	if (@Name = '')
 	begin
 		select @Success = 0
-		select @Message = 'Некорректный логин'
+		select @Message = 'Invalid login'
 		return
 	end
 	else if (@Password = '')
 	begin
 		select @Success = 0
-		select @Message = 'Некорректный пароль'
+		select @Message = 'Invalid password'
 		return
 	end
 	else if (select count(*) from Authors where Authors.Name = @Name) = 0
@@ -77,17 +70,14 @@ begin
 	else
 	begin
 		select @Success = 0
-		select @Message = 'Пользователь с таким логином уже существует'
+		select @Message = 'User with such login already exist'
 	end
 end
-*/
 
 
 
--- Авторизация пользователя
+-- User authorization
 
-/*
-drop procedure UserLogin
 go
 create procedure UserLogin
 	@Name nvarchar(max),
@@ -100,13 +90,13 @@ begin
 	if (@Name = '')
 	begin
 		select @Success = 0
-		select @Message = 'Некорректный логин'
+		select @Message = 'Invalid login'
 		return
 	end
 	else if ((select count(*) from Users where Users.Name = @Name) != 1)
 	begin
 		select @Success = 0
-		select @Message = 'Пользователя с таким логином не существует'
+		select @Message = 'User with such login does not exist'
 		return
 	end
 	else if ((select Password from Users where Name = @Name) = @Password)
@@ -117,17 +107,15 @@ begin
 	else
 	begin
 		select @Success = 0
-		select @Message = 'Неверный пароль'
+		select @Message = 'Invalid password'
 	end
 end
-*/
 
 
 
--- Авторизация автора
 
-/*
-drop procedure AuthorLogin
+-- Author authorization
+
 go
 create procedure AuthorLogin
 	@Name nvarchar(max),
@@ -140,13 +128,13 @@ begin
 	if (@Name = '')
 	begin
 		select @Success = 0
-		select @Message = 'Некорректный логин'
+		select @Message = 'Invalid login'
 		return
 	end
 	else if ((select count(*) from Authors where Authors.Name = @Name) != 1)
 	begin
 		select @Success = 0
-		select @Message = 'Пользователя с таким логином не существует'
+		select @Message = 'User with such login does not exist'
 		return
 	end
 	else if ((select Password from Authors where Name = @Name) = @Password)
@@ -157,21 +145,9 @@ begin
 	else
 	begin
 		select @Success = 0
-		select @Message = 'Неверный пароль'
+		select @Message = 'Invalid password'
 	end
 end
-*/
-
-
-
-/*
-declare @var1 int
-select @var1 = Users.IdUser from Users where Users.Name = 'Семён'
-
-PRINT @var1
-*/
-
-
 
 
 
